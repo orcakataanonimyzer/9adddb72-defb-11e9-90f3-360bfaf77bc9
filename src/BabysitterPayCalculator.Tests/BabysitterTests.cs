@@ -30,5 +30,18 @@ namespace BabysitterPayCalculator.Tests
             // Assert.
             Assert.AreEqual(minimumStartTime, Babysitter.MinimumStartTime);
         }
+
+        [TestMethod]
+        public void Babysitter_MaximumEndTime_ReturnsValuePassed()
+        {
+            // Arrange.
+            var maximumEndTime = new TimeSpan(1);
+
+            // Act.
+            Babysitter.MaximumEndTime = maximumEndTime;
+
+            // Assert.
+            Assert.AreEqual(maximumEndTime, Babysitter.MaximumEndTime);
+        }
     }
 }
