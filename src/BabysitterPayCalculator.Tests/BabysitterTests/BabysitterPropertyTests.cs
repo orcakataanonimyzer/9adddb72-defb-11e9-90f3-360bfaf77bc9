@@ -5,7 +5,7 @@ using System;
 namespace BabysitterPayCalculator.Tests
 {
     [TestClass]
-    public class BabysitterTests
+    public class BabysitterPropertyTests
     {
         private Babysitter Babysitter;
 
