@@ -59,13 +59,13 @@ namespace BabysitterPayCalculator.Tests
         public void MeetsJobTimeRequirements_ReturnsFalseForInvalidEndTimeJob()
         {
             // Arrange.
-            Job.EndDateTime = new DateTime(2019, 6, 21, 2, 0, 0); // 6/21/2019 - 2:00:00AM
+            Job.EndDateTime = new DateTime(2019, 6, 21, 4, 0, 0); // 6/21/2019 - 4:00:00AM
 
             // Act.
             var metRequirements = Babysitter.MeetsJobTimeRequirements(Job);
 
             // Assert.
-            var expectedValue = true;
+            var expectedValue = false;
             Assert.AreEqual(expectedValue, metRequirements);
         }
     }

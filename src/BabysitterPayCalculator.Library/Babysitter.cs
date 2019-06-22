@@ -9,6 +9,11 @@ namespace BabySitterPayCalculator.Library
 
         public TimeSpan MaximumEndTime { get; set; }
 
+        /// <summary>
+        ///     Validates the jobs requirements against the babysitter.
+        /// </summary>
+        /// <param name="job">The job to be validated.</param>
+        /// <returns>True or False if requirements are met.</returns>
         public bool MeetsJobTimeRequirements(Job job)
         {
             if (job.StartDateTime.TimeOfDay < MinimumStartTime
