@@ -30,5 +30,18 @@ namespace BabysitterPayCalculator.Tests
             // Assert.
             Assert.AreEqual(startDateTime, Job.StartDateTime);
         }
+
+        [TestMethod]
+        public void Job_EndDateTime_ReturnsValuePassed()
+        {
+            // Arrange.
+            var endDateTime = new DateTime(2019, 6, 20);
+
+            // Act.
+            Job.EndDateTime = endDateTime;
+
+            // Assert.
+            Assert.AreEqual(endDateTime, Job.EndDateTime);
+        }
     }
 }
