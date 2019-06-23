@@ -27,6 +27,11 @@ namespace BabySitterPayCalculator.Library
             return true;
         }
 
+        /// <summary>
+        ///     Attempts to add a new <see cref="Job"> to the babysitter.
+        /// </summary>
+        /// <param name="job">The job to be added.</param>
+        /// <exception cref="ArgumentException">Babysitter does not meet job requirements.</exception>
         public void AddJob(Job job)
         {
             if (MeetsJobTimeRequirements(job))
