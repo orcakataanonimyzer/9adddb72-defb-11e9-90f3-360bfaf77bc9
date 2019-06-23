@@ -6,6 +6,7 @@ namespace BabysitterPayCalculator.Library
     {
         public DateTime StartDateTime { get; set; }
         public DateTime EndDateTime { get; set; }
+        public Family Family { get; set; }
 
         /// <summary>
         ///     Compares the start and end time for validity.

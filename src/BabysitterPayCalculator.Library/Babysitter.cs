@@ -1,6 +1,7 @@
 ﻿using BabysitterPayCalculator.Library;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BabySitterPayCalculator.Library
 {
@@ -42,6 +43,31 @@ namespace BabySitterPayCalculator.Library
             {
                 throw new ArgumentException("You do not meet the requirements for this job.");
             }
+        }
+
+        /// <summary>
+        ///     Calculates the total pay for the given job.
+        /// </summary>
+        /// <param name="job"></param>
+        /// <returns>The total pay for the job.</returns>
+        public decimal CalculatePayForJob(Job job)
+        {
+            var familyHourlyRates = job.Family.FamilyHourlyRates;
+            var rateOfPay = job.Family.DefaultHourlyRate;
+            var totalPay = 0m;
+
+            for(var startDateTime = job.StartDateTime; startDateTime < job.EndDateTime; startDateTime = startDateTime.AddHours(1))
+            {
+                // Attempt to find a rate change every hour to change the rate.
+                var hourlyRateChange = familyHourlyRates.SingleOrDefault(fhr => fhr.StartTime == startDateTime.TimeOfDay);
+                if (hourlyRateChange != null) 
+                {
+                    rateOfPay = hourlyRateChange.HourlyRate;
+                }
+
+                totalPay += rateOfPay;
+            }
+            return totalPay;
         }
     }
 }
