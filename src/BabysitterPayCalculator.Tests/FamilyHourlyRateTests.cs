@@ -19,5 +19,18 @@ namespace BabysitterPayCalculator.Tests
             // Assert.
             Assert.AreEqual(rateStartTime, familyHourlyRate);
         }
+
+        [TestMethod]
+        public void FamilyHourlyRate_HourlyRate_ReturnsValuePassed()
+        {
+            // Arrange.
+            var hourlyRate = 1.21m;
+
+            // Act.
+            var familyHourlyRate = new FamilyHourlyRate().HourlyRate = hourlyRate;
+
+            // Assert.
+            Assert.AreEqual(hourlyRate, familyHourlyRate);
+        }
     }
 }
