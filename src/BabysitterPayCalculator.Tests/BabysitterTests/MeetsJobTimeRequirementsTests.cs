@@ -29,7 +29,7 @@ namespace BabysitterPayCalculator.Tests
         }
 
         [TestMethod]
-        public void MeetsJobTimeRequirements_ReturnsTrueForValidJob()
+        public void Babysitter_MeetsJobTimeRequirements_ReturnsTrueForValidJob()
         {
             // Act.
             var metRequirements = Babysitter.MeetsJobTimeRequirements(Job);
@@ -41,7 +41,7 @@ namespace BabysitterPayCalculator.Tests
 
 
         [TestMethod]
-        public void MeetsJobTimeRequirements_ReturnsFalseForInvalidStartTimeJob()
+        public void Babysitter_MeetsJobTimeRequirements_ReturnsFalseForInvalidStartTimeJob()
         {
             // Arrange.
             Job.StartDateTime = new DateTime(2019, 6, 20, 16, 0, 0); // 6/20/2019 - 4:00:00PM
@@ -56,7 +56,7 @@ namespace BabysitterPayCalculator.Tests
 
 
         [TestMethod]
-        public void MeetsJobTimeRequirements_ReturnsFalseForInvalidEndTimeJob()
+        public void Babysitter_MeetsJobTimeRequirements_ReturnsFalseForInvalidEndTimeJob()
         {
             // Arrange.
             Job.EndDateTime = new DateTime(2019, 6, 21, 4, 0, 0); // 6/21/2019 - 4:00:00AM
