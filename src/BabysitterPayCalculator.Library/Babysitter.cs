@@ -29,7 +29,14 @@ namespace BabySitterPayCalculator.Library
 
         public void AddJob(Job job)
         {
-            Jobs.Add(job);
+            if (MeetsJobTimeRequirements(job))
+            {
+                Jobs.Add(job);
+            } 
+            else
+            {
+                throw new ArgumentException("You do not meet the requirements for this job.");
+            }
         }
     }
 }

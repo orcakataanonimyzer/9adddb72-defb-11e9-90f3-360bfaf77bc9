@@ -31,5 +31,25 @@ namespace BabysitterPayCalculator.Tests.BabysitterTests
             var expectedJobCount = 1;
             Assert.AreEqual(expectedJobCount, babySitter.Jobs.Count);
         }
+
+        [TestMethod]
+        public void Babysitter_AddJob_ThrowsArgumentExceptionForInvalidJob()
+        {
+            // Arrange.
+            var job = new Job
+            {
+                StartDateTime = new DateTime(2019, 6, 20, 16, 0, 0), // 6/20/2019 - 4:00:00PM
+                EndDateTime = new DateTime(2019, 6, 21, 3, 0, 0) // 6/21/2019 - 3:00:00AM
+            };
+
+            var babySitter = new Babysitter
+            {
+                MinimumStartTime = new TimeSpan(17, 0, 0), // 5:00:00PM
+                MaximumEndTime = new TimeSpan(3, 0, 0) // 3:00:00AM
+            };
+
+            // Act & Assert.
+            Assert.ThrowsException<ArgumentException>(() => babySitter.AddJob(job));
+        }
     }
 }
