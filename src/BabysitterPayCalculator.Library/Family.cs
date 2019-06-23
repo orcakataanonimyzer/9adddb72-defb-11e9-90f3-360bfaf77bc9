@@ -4,6 +4,8 @@ namespace BabysitterPayCalculator.Library
 {
     public class Family
     {
+        public decimal DefaultHourlyRate { get; set; }
+
         public ICollection<FamilyHourlyRate> FamilyHourlyRates { get; set; } = new HashSet<FamilyHourlyRate>();
 
         /// <summary>
