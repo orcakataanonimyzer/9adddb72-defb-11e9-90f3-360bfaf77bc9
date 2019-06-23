@@ -7,30 +7,35 @@ namespace BabysitterPayCalculator.Tests
     [TestClass]
     public class FamilyHourlyRateTests
     {
+        private FamilyHourlyRate FamilyHourlyRate;
+
+        /// <summary>
+        ///     Initializes before each test.
+        /// </summary>
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            FamilyHourlyRate = new FamilyHourlyRate()
+            {
+                HourlyRate = 1.21m,
+                StartTime = new TimeSpan(1, 0, 0)
+            };
+        }
+
         [TestMethod]
         public void FamilyHourlyRate_StartTime_ReturnsValuePassed()
         {
-            // Arrange.
-            var rateStartTime = new TimeSpan(1, 0, 0);
-
-            // Act.
-            var familyHourlyRate = new FamilyHourlyRate().StartTime = rateStartTime;
-
             // Assert.
-            Assert.AreEqual(rateStartTime, familyHourlyRate);
+            var expectedStartTime = new TimeSpan(1, 0, 0);
+            Assert.AreEqual(expectedStartTime, FamilyHourlyRate.StartTime);
         }
 
         [TestMethod]
         public void FamilyHourlyRate_HourlyRate_ReturnsValuePassed()
         {
-            // Arrange.
-            var hourlyRate = 1.21m;
-
-            // Act.
-            var familyHourlyRate = new FamilyHourlyRate().HourlyRate = hourlyRate;
-
             // Assert.
-            Assert.AreEqual(hourlyRate, familyHourlyRate);
+            var expectedHourlyRate = 1.21m;
+            Assert.AreEqual(expectedHourlyRate, FamilyHourlyRate.HourlyRate);
         }
     }
 }
