@@ -7,6 +7,10 @@ namespace BabysitterPayCalculator.Library
         public DateTime StartDateTime { get; set; }
         public DateTime EndDateTime { get; set; }
 
+        /// <summary>
+        ///     Compares the start and end time for validity.
+        /// </summary>
+        /// <returns>True or false if start and end are valid.</returns>
         public bool HasValidStartAndEnd()
         {
             if (EndDateTime <= StartDateTime)
