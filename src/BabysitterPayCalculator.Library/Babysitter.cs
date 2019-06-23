@@ -20,8 +20,11 @@ namespace BabySitterPayCalculator.Library
         /// <returns>True or False if requirements are met.</returns>
         public bool MeetsJobTimeRequirements(Job job)
         {
-            if (job.StartDateTime.TimeOfDay < MinimumStartTime
-                || job.EndDateTime.TimeOfDay > MaximumEndTime)
+            var babySitterStart = GetBabysitterStartDateTimeForJob(job);
+            var babySitterEnd = GetBabysitterEndDateTimeForJob(job);
+
+            if (job.StartDateTime < babySitterStart
+                || job.EndDateTime > babySitterEnd)
             {
                 return false;
             }
@@ -56,18 +59,65 @@ namespace BabySitterPayCalculator.Library
             var rateOfPay = job.Family.DefaultHourlyRate;
             var totalPay = 0m;
 
+            var jobFamilyHourlyRates = new List<Tuple<DateTime, decimal>>();
+            foreach(var familyHourlyRate in job.Family.FamilyHourlyRates)
+            {
+                var dateTime = GetHourlyRateChangeDateTimeByJobAndTime(job, familyHourlyRate.StartTime);
+                jobFamilyHourlyRates.Add(new Tuple<DateTime, decimal>(dateTime, familyHourlyRate.HourlyRate));
+            }
+
             for(var startDateTime = job.StartDateTime; startDateTime < job.EndDateTime; startDateTime = startDateTime.AddHours(1))
             {
                 // Attempt to find a rate change every hour to change the rate.
-                var hourlyRateChange = familyHourlyRates.SingleOrDefault(fhr => fhr.StartTime == startDateTime.TimeOfDay);
+                var hourlyRateChange = jobFamilyHourlyRates.LastOrDefault(rate => rate.Item1 <= startDateTime);
                 if (hourlyRateChange != null) 
                 {
-                    rateOfPay = hourlyRateChange.HourlyRate;
+                    rateOfPay = hourlyRateChange.Item2;
                 }
 
                 totalPay += rateOfPay;
             }
             return totalPay;
+        }
+
+        private DateTime GetHourlyRateChangeDateTimeByJobAndTime(Job job, TimeSpan changeTime)
+        {
+            var hourlyRateChangeDateTime = job.StartDateTime.Date.Add(changeTime);
+
+            if(job.EndDateTime < hourlyRateChangeDateTime)
+            {
+                hourlyRateChangeDateTime = hourlyRateChangeDateTime.AddDays(-1);
+            }
+            if(job.StartDateTime > hourlyRateChangeDateTime)
+            {
+                hourlyRateChangeDateTime = hourlyRateChangeDateTime.AddDays(1);
+            }
+
+            return hourlyRateChangeDateTime;
+        }
+
+        private DateTime GetBabysitterStartDateTimeForJob(Job job)
+        {
+            var babysitterStartDateTime = job.StartDateTime.Date.Add(MinimumStartTime);
+
+            if(job.EndDateTime < babysitterStartDateTime)
+            {
+                babysitterStartDateTime = babysitterStartDateTime.AddDays(-1);
+            }
+
+            return babysitterStartDateTime;
+        }
+
+        private DateTime GetBabysitterEndDateTimeForJob(Job job)
+        {
+            var babysitterEndDateTime = job.EndDateTime.Date.Add(MaximumEndTime);
+
+            if (job.StartDateTime > babysitterEndDateTime)
+            {
+                babysitterEndDateTime = babysitterEndDateTime.AddDays(1);
+            }
+
+            return babysitterEndDateTime;
         }
     }
 }

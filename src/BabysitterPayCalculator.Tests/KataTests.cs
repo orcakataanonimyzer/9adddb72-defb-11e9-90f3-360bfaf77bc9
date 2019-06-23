@@ -27,7 +27,7 @@ namespace BabysitterPayCalculator.Tests
             Job = new Job
             {
                 StartDateTime = new DateTime(2019, 6, 20, 17, 0, 0), // 6/20/2019 - 5:00:00PM
-                EndDateTime = new DateTime(2019, 6, 21, 4, 0, 0), // 6/21/2019 - 3:00:00AM
+                EndDateTime = new DateTime(2019, 6, 21, 4, 0, 0), // 6/21/2019 - 4:00:00AM
                 Family = Family
             };
         }
@@ -61,7 +61,7 @@ namespace BabysitterPayCalculator.Tests
             // Arrange.
             var familyHourlyRate = new FamilyHourlyRate
             {
-                StartTime = new TimeSpan(22, 0, 0), // 11:00PM
+                StartTime = new TimeSpan(22, 0, 0), // 10:00PM
                 HourlyRate = 8
             };
             var familyHourlyRateTwo = new FamilyHourlyRate
