@@ -9,6 +9,10 @@ namespace BabysitterPayCalculator.Library
 
         public bool HasValidStartAndEnd()
         {
+            if (EndDateTime <= StartDateTime)
+            {
+                return false;
+            }
             return true;
         }
     }
