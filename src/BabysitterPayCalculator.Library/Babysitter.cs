@@ -1,5 +1,6 @@
 ﻿using BabysitterPayCalculator.Library;
 using System;
+using System.Collections.Generic;
 
 namespace BabySitterPayCalculator.Library
 {
@@ -8,6 +9,8 @@ namespace BabySitterPayCalculator.Library
         public TimeSpan MinimumStartTime { get; set; }
 
         public TimeSpan MaximumEndTime { get; set; }
+
+        public ICollection<Job> Jobs { get; set; } = new HashSet<Job>();
 
         /// <summary>
         ///     Validates the jobs requirements against the babysitter.
@@ -22,6 +25,11 @@ namespace BabySitterPayCalculator.Library
                 return false;
             }
             return true;
+        }
+
+        public void AddJob(Job job)
+        {
+            Jobs.Add(job);
         }
     }
 }
