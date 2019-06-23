@@ -15,42 +15,31 @@ namespace BabysitterPayCalculator.Tests
         [TestInitialize]
         public void TestInitialize()
         {
-            Job = new Job();
+            Job = new Job(){
+                StartDateTime = new DateTime(2019, 6, 20, 1, 0, 0),
+                EndDateTime = new DateTime(2019, 6, 20, 2, 0, 0)
+            };
         }
 
         [TestMethod]
         public void Job_StartDateTime_ReturnsValuePassed()
         {
-            // Arrange.
-            var startDateTime = new DateTime(2019, 6, 20);
-
-            // Act.
-            Job.StartDateTime = startDateTime;
-
             // Assert.
-            Assert.AreEqual(startDateTime, Job.StartDateTime);
+            var expectedStartDateTime = new DateTime(2019, 6, 20, 1, 0, 0);
+            Assert.AreEqual(expectedStartDateTime, Job.StartDateTime);
         }
 
         [TestMethod]
         public void Job_EndDateTime_ReturnsValuePassed()
         {
-            // Arrange.
-            var endDateTime = new DateTime(2019, 6, 20);
-
-            // Act.
-            Job.EndDateTime = endDateTime;
-
             // Assert.
-            Assert.AreEqual(endDateTime, Job.EndDateTime);
+            var expectedEndDateTime = new DateTime(2019, 6, 20, 2, 0, 0);
+            Assert.AreEqual(expectedEndDateTime, Job.EndDateTime);
         }
         
         [TestMethod]
         public void Job_HasValidStartAndEnd_ReturnsTrueForValidStartAndEnd()
         {
-            // Arrange.
-            Job.StartDateTime = new DateTime(2019, 6, 20, 1, 0, 0);
-            Job.EndDateTime = new DateTime(2019, 6, 20, 2, 0, 0);
-
             // Act.
             var hasValidStartAndEnd = Job.HasValidStartAndEnd();
 
@@ -63,7 +52,6 @@ namespace BabysitterPayCalculator.Tests
         public void Job_HasValidStartAndEnd_ReturnsFalseForInvalidStartAndEnd()
         {
             // Arrange.
-            Job.StartDateTime = new DateTime(2019, 6, 20, 2, 0, 0);
             Job.EndDateTime = new DateTime(2019, 6, 20, 1, 0, 0);
 
             // Act.
