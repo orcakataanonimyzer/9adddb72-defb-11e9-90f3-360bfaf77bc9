@@ -8,6 +8,30 @@ namespace BabysitterPayCalculator.Tests
     [TestClass]
     public class KataTests
     {
+        private Babysitter Babysitter;
+        private Job Job;
+        private Family Family;
+
+        /// <summary>
+        ///     Initializes before each test.
+        /// </summary>
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            Family = new Family();
+            Babysitter = new Babysitter
+            {
+                MinimumStartTime = new TimeSpan(17, 0, 0), // 5:00:00PM
+                MaximumEndTime = new TimeSpan(4, 0, 0) // 4:00:00AM
+            };
+            Job = new Job
+            {
+                StartDateTime = new DateTime(2019, 6, 20, 17, 0, 0), // 6/20/2019 - 5:00:00PM
+                EndDateTime = new DateTime(2019, 6, 21, 4, 0, 0), // 6/21/2019 - 3:00:00AM
+                Family = Family
+            };
+        }
+
         [TestMethod]
         public void Kata_FamilyA()
         {
@@ -18,28 +42,13 @@ namespace BabysitterPayCalculator.Tests
                 HourlyRate = 20
             };
 
-            var family = new Family
-            {
-                DefaultHourlyRate = 15
-            };
-            family.AddFamilyHourlyRate(familyHourlyRate);
+            Family.DefaultHourlyRate = 15;
+            Family.AddFamilyHourlyRate(familyHourlyRate);
 
-            var job = new Job
-            {
-                StartDateTime = new DateTime(2019, 6, 20, 17, 0, 0), // 6/20/2019 5:00PM
-                EndDateTime = new DateTime(2019, 6, 21, 4, 0, 0), // 6/21/2019 4:00AM
-                Family = family
-            };
-
-            var babySitter = new Babysitter
-            {
-                MinimumStartTime = new TimeSpan(5, 0, 0), // 5:00PM
-                MaximumEndTime = new TimeSpan(4, 0, 0) // 4:00AM
-            };
-            babySitter.AddJob(job);
+            Babysitter.AddJob(Job);
 
             // Act.
-            var totalPay = babySitter.CalculatePayForJob(job);
+            var totalPay = Babysitter.CalculatePayForJob(Job);
 
             // Assert.
             var expectedTotalPay = 190;
@@ -61,29 +70,14 @@ namespace BabysitterPayCalculator.Tests
                 HourlyRate = 16
             };
 
-            var family = new Family
-            {
-                DefaultHourlyRate = 12
-            };
-            family.AddFamilyHourlyRate(familyHourlyRate);
-            family.AddFamilyHourlyRate(familyHourlyRateTwo);
+            Family.DefaultHourlyRate = 12;
+            Family.AddFamilyHourlyRate(familyHourlyRate);
+            Family.AddFamilyHourlyRate(familyHourlyRateTwo);
 
-            var job = new Job
-            {
-                StartDateTime = new DateTime(2019, 6, 20, 17, 0, 0), // 6/20/2019 5:00PM
-                EndDateTime = new DateTime(2019, 6, 21, 4, 0, 0), // 6/21/2019 4:00AM
-                Family = family
-            };
-
-            var babySitter = new Babysitter
-            {
-                MinimumStartTime = new TimeSpan(5, 0, 0), // 5:00PM
-                MaximumEndTime = new TimeSpan(4, 0, 0) // 4:00AM
-            };
-            babySitter.AddJob(job);
+            Babysitter.AddJob(Job);
 
             // Act.
-            var totalPay = babySitter.CalculatePayForJob(job);
+            var totalPay = Babysitter.CalculatePayForJob(Job);
 
             // Assert.
             var expectedTotalPay = 140;
@@ -100,28 +94,13 @@ namespace BabysitterPayCalculator.Tests
                 HourlyRate = 15
             };
 
-            var family = new Family
-            {
-                DefaultHourlyRate = 21
-            };
-            family.AddFamilyHourlyRate(familyHourlyRate);
+            Family.DefaultHourlyRate = 21;
+            Family.AddFamilyHourlyRate(familyHourlyRate);
 
-            var job = new Job
-            {
-                StartDateTime = new DateTime(2019, 6, 20, 17, 0, 0), // 6/20/2019 5:00PM
-                EndDateTime = new DateTime(2019, 6, 21, 4, 0, 0), // 6/21/2019 4:00AM
-                Family = family
-            };
-
-            var babySitter = new Babysitter
-            {
-                MinimumStartTime = new TimeSpan(5, 0, 0), // 5:00PM
-                MaximumEndTime = new TimeSpan(4, 0, 0) // 4:00AM
-            };
-            babySitter.AddJob(job);
+            Babysitter.AddJob(Job);
 
             // Act.
-            var totalPay = babySitter.CalculatePayForJob(job);
+            var totalPay = Babysitter.CalculatePayForJob(Job);
 
             // Assert.
             var expectedTotalPay = 189;
