@@ -8,7 +8,7 @@ namespace BabysitterPayCalculator.Tests
     public class FamilyHourlyRateTests
     {
         [TestMethod]
-        public void FamilyHourlyRate_RateStartTime_ReturnsValuePassed()
+        public void FamilyHourlyRate_StartTime_ReturnsValuePassed()
         {
             // Arrange.
             var rateStartTime = new TimeSpan(1, 0, 0);
